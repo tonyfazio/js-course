@@ -22,7 +22,7 @@ describe("myQuery", function () {
   });
 
   describe("General each function", function () {
-    xit("iterates through an array", function () {
+    it("iterates through an array", function () {
       var testResult = [];
       var someArray = [10, 20, 30];
       $.each(someArray, function (number) {
@@ -38,18 +38,18 @@ describe("myQuery", function () {
 
   describe("Selectors", function () {
 
-    xit("selects an element by id", function() {
+    it("selects an element by id", function() {
       var elem = $('#profile').get(0);
       expect(elem.className).toEqual('noice');
     });
 
-    xit("selects elements by class name", function() {
+    it("selects elements by class name", function() {
       var buttons = $('.button');
       expect(buttons.get(0).className).toMatch(/first/);
       expect(buttons.get(1).className).toMatch(/second/);
     });
 
-    xit("selects elements by tag name", function() {
+    it("selects elements by tag name", function() {
       var anchors = $('a');
       expect(anchors.length).toEqual(2)
       expect(anchors.get(0).className).toEqual("button second");
@@ -62,7 +62,7 @@ describe("myQuery", function () {
   });
 
   describe("Selected elements each function", function () {
-    xit("iterates through all selected elements", function() {
+    it("iterates through all selected elements", function() {
       var testResult = [];
       $('.button').each(function (elem, i) {
         testResult.push(elem.className + ' ' + i);
@@ -76,16 +76,32 @@ describe("myQuery", function () {
 
   describe("Show and Hide", function () {
     // TODO: Write tests for .show() and .hide()
+    it ("hides elements", function(){
+      expect( $('.button').get(0).style.display ).toEqual('');
+      $('.button').hide();
+      expect( $('.button').get(0).style.display ).toEqual('none');
+    });
+
+    it ("shows elements", function(){
+      $('.button').hide();
+      expect( $('.button').get(0).style.display ).toEqual('none');
+      $('.button').show();
+      expect( $('.button').get(0).style.display ).toEqual('block');
+    });
   });
 
   describe("addClass", function () {
     // TODO: Write tests for addClass
     // HINT: Test using .toMatch() like the selector test
+    it ("adds a new class", function(){
+      $('.button').addClass('avatar');
+      expect($('.button').get(0).className).toMatch(/avatar/);
+    });
   });
 
   describe("Modifying CSS", function () {
 
-    xit("can set a single property", function() {
+    it("can set a single property", function() {
       // Ensure they're not already hidden
       expect( $('.button').get(0).style.display ).toEqual('');
       expect( $('.button').get(1).style.display ).toEqual('');
@@ -97,7 +113,18 @@ describe("myQuery", function () {
     });
 
     // TODO: (`it` without a function are pending tests)
-    it("can set multiple properties in one call");
+    it("can set multiple properties in one call", function (){
+
+      expect( $('.button').get(0).style.display ).toEqual('');
+      expect( $('.button').get(1).style.display ).toEqual('');
+      expect( $('.button').get(0).style.color ).toEqual('');
+      expect( $('.button').get(1).style.color ).toEqual('');
+      $('.button').css({'display': 'none', 'color': 'red'});
+      expect( $('.button').get(0).style.display ).toEqual('none');
+      expect( $('.button').get(1).style.display ).toEqual('none');
+      expect( $('.button').get(0).style.color ).toEqual('red');
+      expect( $('.button').get(1).style.color ).toEqual('red');
+    });
   });
 
 });
